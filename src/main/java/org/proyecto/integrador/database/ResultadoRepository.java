@@ -11,11 +11,11 @@ public class ResultadoRepository {
     public static ArrayList<Partido> getPartidos() throws SQLException {
         ResultSet rs = null;
         Connection con = GetConnection.getConnectionOfDataBase();
-        if (con != null) {
+        try{
             PreparedStatement stmt = con.prepareStatement("SELECT ronda, equipo1, cantGoles1, " +
                     "cantGoles2, equipo2, partido FROM resultados");
             rs = stmt.executeQuery();
-        } else {
+        } catch (SQLException e){
             System.out.println("Connection is null");
         }
         return PartidoFactory.buildPartido(rs);

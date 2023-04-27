@@ -15,12 +15,12 @@ public class ParticipanteRepository {
         ResultSet rs;
         ArrayList<Participante> participantes = null;
         Connection con = GetConnection.getConnectionOfDataBase();
-        if(con != null){
+        try{
             PreparedStatement stmt = con.prepareStatement("select p.participante from pronostico p " +
                     "group by p.participante");
             rs = stmt.executeQuery();
             participantes = ParticipantesFactoy.buildParticipantes(rs);
-        } else{
+        } catch (SQLException e){
             System.out.println("Connection is null");
         }
         return participantes;

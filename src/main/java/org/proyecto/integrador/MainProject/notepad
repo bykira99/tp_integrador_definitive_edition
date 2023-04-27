@@ -1,0 +1,7 @@
+private static void crearPuestas(ArrayList<Participante> participantes, ArrayList<Apuesta> apuestaList) throws SQLException {
+        for (int recorridoArray = 0; recorridoArray < participantes.size(); recorridoArray++) {
+            Apuesta apuesta = new Apuesta(participantes.get(recorridoArray), PronosticoRepository.getPronosticos(participantes.get(recorridoArray).getNombre()));
+            apuesta.setPuntos(CalcularPuntos.calcular(apuesta.getPronosticos()));
+            apuestaList.add(apuesta);
+        }
+    }
